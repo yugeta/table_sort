@@ -1,0 +1,24 @@
+*{
+  font-size:12px;
+}
+table{
+  border-collapse:collapse;
+}
+th,td{
+  border:1px solid #ccc;
+  padding:4px;
+  white-space:nowrap;
+  min-width:30px;
+  font-weight:normal;
+}
+th{
+  background-color:#eee;
+}
+
+tbody.data{
+  counter-reset: num 0;
+}
+tbody.data .num:before{
+  counter-increment: num;
+  content: counter(num);
+}

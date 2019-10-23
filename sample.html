@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>TableSort</title>
+  <link rel="stylesheet" href="sample.css">
+  <script src="table_sort.js"></script>
+</head>
+<body>
+
+<table class="lists">
+  <thead>
+    <tr>
+      <th class="num" data-sort="none">#</th>
+      <th class="date" data-sort="date">日</th>
+      <th class="kamoku">費目</th>
+      <th class="shop">支払先</th>
+      <th class="subtotal" data-sort="number">金額(税抜)</th>
+      <th class="tax" data-sort="number">税率</th>
+      <th class="tax" data-sort="number">税額</th>
+      <th class="total" data-sort="number">税系(税込)</th>
+      <th class="comment">内容</th>
+    </tr>
+  </thead>
+
+  <tbody class="data">
+    <tr data-id="3">
+      <th class="num"></th>
+      <td class="date">1/5</td>
+      <td class="kamoku">会議費</td>
+      <td class="shop">まんぷく飯店</td>
+      <td class="subtotal">¥1,273</td>
+      <td class="tax">10%</td>
+      <td class="impost">¥127</td>
+      <td class="total">¥1,400</td>
+      <td class="comment">打ち合わせ2名</td>
+    </tr>
+    <tr data-id="5">
+      <th class="num"></th>
+      <td class="date">1/10</td>
+      <td class="kamoku">消耗品費</td>
+      <td class="shop">ドラッグストア　mac 東温野田店</td>
+      <td class="subtotal">¥451</td>
+      <td class="tax">8%</td>
+      <td class="impost">¥36</td>
+      <td class="total">¥487</td>
+      <td class="comment">お茶菓子</td>
+    </tr>
+    <tr data-id="6">
+      <th class="num"></th>
+      <td class="date">1/20</td>
+      <td class="kamoku">消耗品費</td>
+      <td class="shop">フジグラン　重信店</td>
+      <td class="subtotal">¥498</td>
+      <td class="tax">8%</td>
+      <td class="impost">¥39</td>
+      <td class="total">¥537</td>
+      <td class="comment">お茶菓子</td>
+    </tr>
+    <tr data-id="7">
+      <th class="num"></th>
+      <td class="date">1/30</td>
+      <td class="kamoku">会議費</td>
+      <td class="shop">富士そば　原町田店</td>
+      <td class="subtotal">¥282</td>
+      <td class="tax">10%</td>
+      <td class="impost">¥28</td>
+      <td class="total">¥310</td>
+      <td class="comment">作業場初代</td>
+    </tr>
+    <tr data-id="8">
+      <th class="num"></th>
+      <td class="date">1/11</td>
+      <td class="kamoku">会議費</td>
+      <td class="shop">Joyful 愛媛東温店</td>
+      <td class="subtotal">¥1,013</td>
+      <td class="tax">10%</td>
+      <td class="impost">¥101</td>
+      <td class="total">¥1,114</td>
+      <td class="comment">打ち合わせ2名</td>
+    </tr>
+    <tr data-id="9">
+      <th class="num"></th>
+      <td class="date">1/22</td>
+      <td class="kamoku">事務用品費</td>
+      <td class="shop">ドラッグストア　mac 東温野田店</td>
+      <td class="subtotal">¥465</td>
+      <td class="tax">10%</td>
+      <td class="impost">¥46</td>
+      <td class="total">¥511</td>
+      <td class="comment">事務所用備品</td>
+    </tr>
+    <tr data-id="10">
+      <th class="num"></th>
+      <td class="date">2/1</td>
+      <td class="kamoku">会議費</td>
+      <td class="shop">ラパウザ　新宿西口パレットビル店</td>
+      <td class="subtotal">¥310</td>
+      <td class="tax">10%</td>
+      <td class="impost">¥30</td>
+      <td class="total">¥340</td>
+      <td class="comment">打ち合わせ2名</td>
+    </tr>
+    <tr data-id="11">
+      <th class="num"></th>
+      <td class="date">2/10</td>
+      <td class="kamoku">会議費</td>
+      <td class="shop">Chef’s Kitchen 松山空港店</td>
+      <td class="subtotal">¥1,782</td>
+      <td class="tax">10%</td>
+      <td class="impost">¥178</td>
+      <td class="total">¥1,960</td>
+      <td class="comment">打ち合わせ2名</td>
+    </tr>
+    <tr data-id="12">
+      <th class="num"></th>
+      <td class="date">2/5</td>
+      <td class="kamoku">会議費</td>
+      <td class="shop">マクドナルド　フジグラン重信店</td>
+      <td class="subtotal">¥300</td>
+      <td class="tax">10%</td>
+      <td class="impost">¥30</td>
+      <td class="total">¥330</td>
+      <td class="comment">打ち合わせ2名</td>
+    </tr>
+    <tr data-id="13">
+      <th class="num"></th>
+      <td class="date">3/1</td>
+      <td class="kamoku">会議費</td>
+      <td class="shop">マクドナルド　アエタ町田店</td>
+      <td class="subtotal">¥110</td>
+      <td class="tax">10%</td>
+      <td class="impost">¥10</td>
+      <td class="total">¥120</td>
+      <td class="comment">打ち合わせ2名</td>
+    </tr>
+    <tr data-id="14">
+      <th class="num"></th>
+      <td class="date">3/10</td>
+      <td class="kamoku">会議費</td>
+      <td class="shop">ジョイフル　愛媛東温店</td>
+      <td class="subtotal">¥3,564</td>
+      <td class="tax">10%</td>
+      <td class="impost">¥356</td>
+      <td class="total">¥3,920</td>
+      <td class="comment">打ち合わせ3名</td>
+    </tr>
+    <tr data-id="15">
+      <th class="num"></th>
+      <td class="date">3/20</td>
+      <td class="kamoku">会議費</td>
+      <td class="shop">まんぷく飯店</td>
+      <td class="subtotal">¥7,691</td>
+      <td class="tax">10%</td>
+      <td class="impost">¥769</td>
+      <td class="total">¥8,460</td>
+      <td class="comment">打ち合わせ　5名</td>
+    </tr>
+    <tr data-id="16">
+      <th class="num"></th>
+      <td class="date">10/10</td>
+      <td class="kamoku">会議費</td>
+      <td class="shop">たも屋　松山平井店</td>
+      <td class="subtotal">¥1,673</td>
+      <td class="tax">10%</td>
+      <td class="impost">¥167</td>
+      <td class="total">¥1,840</td>
+      <td class="comment">打ち合わせ3名</td>
+    </tr>
+    <tr data-id="17">
+      <th class="num"></th>
+      <td class="date">11/10</td>
+      <td class="kamoku">水道光熱費</td>
+      <td class="shop">東京ガス株式会社</td>
+      <td class="subtotal">¥4,971</td>
+      <td class="tax">8%</td>
+      <td class="impost">¥397</td>
+      <td class="total">¥5,368</td>
+      <td class="comment">ガス利用10月分</td>
+    </tr>
+    <tr data-id="18">
+      <th class="num"></th>
+      <td class="date">10/1</td>
+      <td class="kamoku">支払手数料</td>
+      <td class="shop">セディナ</td>
+      <td class="subtotal">¥311,823</td>
+      <td class="tax">0%</td>
+      <td class="impost">¥0</td>
+      <td class="total">¥311,823</td>
+      <td class="comment">カード引き落とし</td>
+    </tr>
+    <tr data-id="19">
+      <th class="num"></th>
+      <td class="date">12/24</td>
+      <td class="kamoku">通信費</td>
+      <td class="shop">さくらインターネット</td>
+      <td class="subtotal">¥635</td>
+      <td class="tax">10%</td>
+      <td class="impost">¥63</td>
+      <td class="total">¥698</td>
+      <td class="comment">サーバーレンタル両</td>
+    </tr>
+    <tr data-id="20">
+      <th class="num"></th>
+      <td class="date">12/25</td>
+      <td class="kamoku">事務用品費</td>
+      <td class="shop">Amazon</td>
+      <td class="subtotal">¥573</td>
+      <td class="tax">10%</td>
+      <td class="impost">¥57</td>
+      <td class="total">¥630</td>
+      <td class="comment">事務所ドア用スマートロック電池</td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+
+  var elms = document.querySelectorAll("table td");
+  for(var i=0; i<elms.length; i++){
+    elms[i].addEventListener("click" , function(e){
+      console.log(e.target.textContent);
+    });
+  }
+
+new $$table_sort({
+  target_selector : ".lists"
+});
+</script>
+
+<body>
+</html>

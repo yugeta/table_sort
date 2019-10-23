@@ -1,0 +1,16 @@
+tr > *[data-tableSort="header"]{
+  cursor:pointer;
+}
+tr > *[data-tableSort="header"]:hover{
+  color:red;
+}
+tr > *[data-tableSort="header"] .tableSort-button:before{
+  margin-left:4px;
+  content:"▽";
+}
+tr > *[data-tableSort="header"][data-sort-type="asc"] .tableSort-button:before{
+  content:"▼";
+}
+tr > *[data-tableSort="header"][data-sort-type="desc"] .tableSort-button:before{
+  content:"▲";
+}
