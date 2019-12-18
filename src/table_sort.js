@@ -612,67 +612,10 @@ var $$table_sort = (function(){
 
       if(txt){
         refineButton.setAttribute("data-mode","refine-on");
-        // // refine-icon-on
-        // cell.setAttribute("data-refine" , "1");
       }
-      // else if(cell.getAttribute("data-refine")){
-      //   // refine-icon-off
-      //   cell.removeAttribute("data-refine");
-      // }
     }
 
   };
-
-  // // refine実行処理
-  // MAIN.prototype.refine_clickButton = function(cell){
-  //   if(!cell){return;}
-  //   var refine_base = document.querySelector(".refine-base");
-  //   if(!refine_base){return;}
-  //   var refine_text = refine_base.querySelector("input[type='text']");
-  //   if(!refine_text){return;}
-  //   var txt = refine_text.value;
-
-  //   // テキスト指定がある場合（絞り込み）
-  //   if(txt){
-  //     var cells = this.get_cell_rows(cell);
-  //     if(!cells || !cells.length){return}
-  //     // check match
-  //     for(var i=0; i<cells.length; i++){
-  //       var tr = new LIB().upperSelector(cells[i],"tr");
-  //       if(cells[i].textContent.match(txt)){
-  //         if(tr.getAttribute("data-hidden")){
-  //           tr.removeAttribute("data-hidden");
-  //         }
-  //       }
-  //       else{
-  //         tr.setAttribute("data-hidden","1");
-  //       }
-  //     }
-  //     // txt-cache
-  //     cell.setAttribute("data-refine-txt" , txt);
-
-  //     // close-window
-  //     this.refile_close();
-
-  //     // refine-icon-on
-  //     cell.setAttribute("data-refine" , "1");
-  //   }
-  //   // テキスト指定がない場合（絞り込みクリア）
-  //   else{
-  //     this.refine_clear();
-
-  //     // close-window
-  //     this.refile_close();
-
-  //     // refine-icon-off
-  //     cell.setAttribute("data-refine" , "0");
-
-  //     // txt-cache-remove
-  //     if(cell.getAttribute("data-refine-txt")){
-  //       cell.removeAttribute("data-refine-txt");
-  //     }
-  //   }
-  // };
 
   // refine実行処理
   MAIN.prototype.refine_clickButton = function(cell){
@@ -691,32 +634,32 @@ var $$table_sort = (function(){
       cell.removeAttribute("data-refine-txt");
     }
 
-    // 2. 現在絞り込まれている状態をクリアする
+    // 2. 絞り込み文字列がある場合はマークする
+    if(txt !== ""){
+      // refine-icon-on
+      cell.setAttribute("data-refine" , "1");
+    }
+    else if(cell.getAttribute("data-refine")){
+      // refine-icon-off
+      cell.removeAttribute("data-refine");
+    }
+
+    // 3. dialogを閉じる
+    this.refile_close();
+
+    // 4. 現在絞り込まれている状態をクリアする
     this.refine_clear();
 
-    // 3. 対象tableを取得
+    // 5. 対象tableを取得
     var table = new LIB().upperSelector(cell , "table");
     if(!table){return;}
 
-    // 3. header-cellの全てにマッチするcell-headを取得
+    // 6. header-cellの全てにマッチするcell-headを取得
     var header_datas = this.refine_getPosted_HeaderCells(table);
     if(!header_datas || !header_datas.length){return;}
 
-    // 4. 全てにマッチするtrに非表示フラグをセット
+    // 7. 全てにマッチするtrに非表示フラグをセット
     this.refine_getTr(header_datas);
-
-    // 5. dialogを閉じる
-    this.refile_close();
-
-    // 6. 絞り込み文字列がある場合はマークする
-    // refine-icon-on
-    if(txt !== ""){
-      cell.setAttribute("data-refine" , "1");
-    }
-    // refine-icon-off
-    else if(cell.getAttribute("data-refine")){
-      cell.removeAttribute("data-refine");
-    }
   };
 
   // header-cellの全てにマッチするcell-headを取得
