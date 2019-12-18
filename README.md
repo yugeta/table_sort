@@ -7,6 +7,7 @@ Date    : 2019.10.23
 History : 
 - ver 0.1 : first-commit
 - ver 0.2 : refine（絞り込み）機能の追加
+- ver 0.3 : refactering
 ```
 
 
