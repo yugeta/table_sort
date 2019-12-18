@@ -405,7 +405,7 @@ var $$table_sort = (function(){
 
     // ページ読み込み後の処理
     switch(document.readyState){
-      case "complete"    : this.set();break;
+      case "complete"    : this.init();break;
       case "interactive" : lib.event(window , "DOMContentLoaded" , (function(e){this.init(e)}).bind(this));break;
       default            : lib.event(window , "load" , (function(e){this.init(e)}).bind(this));break;
     }
