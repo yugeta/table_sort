@@ -1,37 +1,39 @@
 tr > *[data-tableSort="header"]{
   cursor:pointer;
 }
-tr > *[data-tableSort="header"]:hover{
+/* tr > *[data-tableSort="header"]:hover{
   color:red;
-}
-tr > *[data-tableSort="header"]:hover .tableSort-button:before{
+} */
+
+tr > *[data-tableSort="header"] .tableSort-button:hover svg,
+tr > *[data-tableSort="header"] .tableRefine-button:hover svg{
   fill:red;
 }
 
-tr > *[data-tableSort="header"] .tableSort-button:before{
+/* tr > *[data-tableSort="header"] .tableSort-button:before{
   margin-left:4px;
-  /* content:"▽"; */
+  content:"▽";
   content:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3Mi43MiA3Mi43MTkiPg0KPHBhdGggZD0iTTcyLjcyLDY1LjY4NkgwTDM2LjM2LDcuMDM0TDcyLjcyLDY1LjY4NnogTTUuMzg4LDYyLjY4Nmg2MS45NDNMMzYuMzYsMTIuNzI3TDUuMzg4LDYyLjY4NnoiIHN0eWxlPSJ0cmFuc2Zvcm0tb3JpZ2luOmNlbnRlcjt0cmFuc2Zvcm06cm90YXRlKDE4MGRlZyk7Ii8+DQo8L3N2Zz4=");
   display:inline-block;
   width:12px;
   vertical-align:middle;
 }
 tr > *[data-tableSort="header"][data-sort-type="asc"] .tableSort-button:before{
-  /* content:"▼"; */
+  content:"▼";
   content:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3Mi43MiA3Mi43MTkiPg0KPHBhdGggZD0iTTcyLjcyLDY1LjY4NkgwTDM2LjM2LDcuMDM0TDcyLjcyLDY1LjY4NnoiIHN0eWxlPSJ0cmFuc2Zvcm0tb3JpZ2luOmNlbnRlcjt0cmFuc2Zvcm06cm90YXRlKDE4MGRlZyk7Ii8+DQo8L3N2Zz4=");
   display:inline-block;
   width:12px;
   vertical-align:middle;
 }
 tr > *[data-tableSort="header"][data-sort-type="desc"] .tableSort-button:before{
-  /* content:"▲"; */
+  content:"▲";
   content:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3Mi43MiA3Mi43MTkiPg0KPHBhdGggZD0iTTcyLjcyICwgNjUuNjg2SDBMMzYuMzYgLCA3LjAzNEw3Mi43MiAsIDY1LjY4NnogIi8+DQo8L3N2Zz4=");
   display:inline-block;
   width:12px;
   vertical-align:middle;
-}
+} */
 
-tr > *[data-tableSort="header"] .tableRefine-button:before{
+/* tr > *[data-tableSort="header"] .tableRefine-button:before{
   margin-left:4px;
   content:url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSItNCAwIDM5MyAzOTMuOTkwMDMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im0zNjguMzEyNSAwaC0zNTEuMjYxNzE5Yy02LjE5NTMxMi0uMDExNzE4OC0xMS44NzUgMy40NDkyMTktMTQuNzA3MDMxIDguOTYwOTM4LTIuODcxMDk0IDUuNTg1OTM3LTIuMzY3MTg3NSAxMi4zMTI1IDEuMzAwNzgxIDE3LjQxNDA2MmwxMjguNjg3NSAxODEuMjgxMjVjLjA0Mjk2OS4wNjI1LjA4OTg0NC4xMjEwOTQuMTMyODEzLjE4MzU5NCA0LjY3NTc4MSA2LjMxMjUgNy4yMDMxMjUgMTMuOTU3MDMxIDcuMjE4NzUgMjEuODE2NDA2djE0Ny43OTY4NzVjLS4wMjczNDQgNC4zNzg5MDYgMS42OTE0MDYgOC41ODIwMzEgNC43NzczNDQgMTEuNjg3NSAzLjA4NTkzNyAzLjEwNTQ2OSA3LjI4MTI1IDQuODQ3NjU2IDExLjY1NjI1IDQuODQ3NjU2IDIuMjI2NTYyIDAgNC40MjU3ODEtLjQ0NTMxMiA2LjQ4MDQ2OC0xLjI5Njg3NWw3Mi4zMTI1LTI3LjU3NDIxOGM2LjQ4MDQ2OS0xLjk3NjU2MyAxMC43ODEyNS04LjA4OTg0NCAxMC43ODEyNS0xNS40NTMxMjZ2LTEyMC4wMDc4MTJjLjAxMTcxOS03Ljg1NTQ2OSAyLjU0Mjk2OS0xNS41MDM5MDYgNy4yMTQ4NDQtMjEuODE2NDA2LjA0Mjk2OS0uMDYyNS4wODk4NDQtLjEyMTA5NC4xMzI4MTItLjE4MzU5NGwxMjguNjgzNTk0LTE4MS4yODkwNjJjMy42Njc5NjktNS4wOTc2NTcgNC4xNzE4NzUtMTEuODIwMzEzIDEuMzAwNzgyLTE3LjQwNjI1LTIuODMyMDMyLTUuNTExNzE5LTguNTExNzE5LTguOTcyNjU2OC0xNC43MTA5MzgtOC45NjA5Mzh6bS0xMzEuNTMxMjUgMTk1Ljk5MjE4OGMtNy4xODc1IDkuNzUzOTA2LTExLjA3NDIxOSAyMS41NDY4NzQtMTEuMDk3NjU2IDMzLjY2NDA2MnYxMTcuNTc4MTI1bC02NiAyNS4xNjQwNjN2LTE0Mi43NDIxODhjLS4wMjM0MzgtMTIuMTE3MTg4LTMuOTEwMTU2LTIzLjkxMDE1Ni0xMS4xMDE1NjMtMzMuNjY0MDYybC0xMjQuOTMzNTkzLTE3NS45OTIxODhoMzM4LjA3MDMxMnptMCAwIi8+Cjwvc3ZnPg==");
   display:inline-block;
@@ -44,7 +46,8 @@ tr > *[data-tableSort="header"][data-refine="1"] .tableRefine-button:before{
   display:inline-block;
   width:12px;
   vertical-align:middle;
-}
+} */
+
 
 
 .refine-area{
@@ -71,7 +74,61 @@ tr > *[data-tableSort="header"][data-refine="1"] .tableRefine-button:before{
   border-radius:2px;
   border:1px solid #ccc;
 }
-.refine-base img{
+.refine-base .button{
+  display:inline-block;
+}
+.refine-base .button svg{
+  display:none;
+}
+.refine-base .button[data-mode="refine-on"] svg.refine-on{
+  display:inline-block;
+}
+.refine-base .button[data-mode="refine-off"] svg.refine-off{
+  display:inline-block;
+}
+
+tr > *[data-tableSort="header"] .tableSort-button,
+tr > *[data-tableSort="header"] .tableRefine-button{
+  display:inline-block;
+  margin-left:4px;
+}
+tr > *[data-tableSort="header"] .tableSort-button svg,
+tr > *[data-tableSort="header"] .tableRefine-button svg{
+  display:none;
+  width:12px;
+  height:12px;
+  vertical-align:middle;
+}
+tr > *[data-tableSort="header"] .tableSort-button svg.down-off{
+  display:inline-block;
+}
+tr > *[data-tableSort="header"][data-sort-type="asc"] .tableSort-button svg.down-on{
+  display:inline-block;
+}
+tr > *[data-tableSort="header"][data-sort-type="asc"] .tableSort-button svg.down-off,
+tr > *[data-tableSort="header"][data-sort-type="desc"] .tableSort-button svg.down-off{
+  display:none;
+}
+tr > *[data-tableSort="header"][data-sort-type="desc"] .tableSort-button svg.up-on{
+  display:inline-block;
+}
+/* tr > *[data-tableSort="header"][data-sort-type="desc"] .tableSort-button svg.up-off{
+  display:inline-block;
+} */
+tr > *[data-tableSort="header"] .tableRefine-button svg.refine-off{
+  display:inline-block;
+}
+tr > *[data-tableSort="header"][data-refine="1"] .tableRefine-button svg.refine-off{
+  display:none;
+}
+tr > *[data-tableSort="header"][data-refine="1"] .tableRefine-button svg.refine-on{
+  display:inline-block;
+}
+
+
+
+.refine-base img,
+.refine-base svg{
   width:14px;
   height:14px;
   vertical-align:middle;
@@ -79,9 +136,16 @@ tr > *[data-tableSort="header"][data-refine="1"] .tableRefine-button:before{
   opacity:0.5;
   cursor:pointer;
 }
-.refine-base img.del{
+.refine-base img.del,
+.refine-base svg.del{
   margin-left:-16px;
 }
-.refine-base img:hover{
+.refine-base img:hover,
+.refine-base svg:hover{
   opacity:1.0;
 }
+
+table tr[data-hidden="1"]{
+  display:none;
+}
+
