@@ -400,11 +400,8 @@ var $$table_sort = (function(){
     this.options = set.options(options);
     this.options.srcDir = lib.urlinfo(new LIB().currentScriptTag).dir;
 
-    // refineモードの場合テンプレートを読み込む(refine.html)
-    // if(typeof this.options.refine !== "undefined"
-    // && this.options.refine === true){
-      this.loadTemplate();
-    // }
+    // テンプレート読み込み
+    this.loadTemplate();
 
     // ページ読み込み後の処理
     switch(document.readyState){
@@ -469,11 +466,8 @@ var $$table_sort = (function(){
 
     var refine_button = "";
     if(this.options.refine === true){
-      // refine_button = "<span class='tableRefine-button'><span>";
       refine_button = this.options.template_refine;
     }
-    // var button_className = (typeof this.options.refine !== "undefined" && this.options.refine === true) ? "tableRefine-button" : "tableSort-button" ;
-    // var sort_button = "<span class='"+ button_className +"'>"+this.options.template_sort+"<span>";
 
     for(var i=0; i<cells.length; i++){
       if(cells[i].getAttribute("data-sort") === "none"){continue}
@@ -498,9 +492,6 @@ var $$table_sort = (function(){
         }
       }
       cells[i].setAttribute("data-tableSort","header");
-      // lib.event(cells[i] , "click" , (function(e){
-      //   this.clickHeader(e)
-      // }).bind(this));
     }
   };
 
@@ -556,26 +547,6 @@ var $$table_sort = (function(){
     }
   };
 
-
-  // headerの項目をクリックした時のソート処理
-  // MAIN.prototype.clickHeader = function(e){
-
-  //   // 絞り込みモード
-  //   if(this.options.refine === true){
-  //     var cell_header = new LIB().upperSelector(e.currentTarget , "[data-tablesort='header']");
-  //     if(cell_header){
-  //       this.refine_view(cell_header);
-  //     }
-  //   }
-
-  //   // sortモード（デフォルト）
-  //   else{
-  //     var cell_header = new LIB().upperSelector(e.currentTarget , "[data-tablesort='header']");
-  //     if(cell_header){
-  //       this.rowSort(cell_header);
-  //     }
-  //   }
-  // };
 
   // sortボタンをクリック
   MAIN.prototype.clickHeader_sort = function(e){
@@ -638,12 +609,70 @@ var $$table_sort = (function(){
       new LIB().event(refineButton , "click" , (function(cell,e){
         this.refine_clickButton(cell,e);
       }).bind(this,cell));
+
       if(txt){
         refineButton.setAttribute("data-mode","refine-on");
+        // // refine-icon-on
+        // cell.setAttribute("data-refine" , "1");
       }
+      // else if(cell.getAttribute("data-refine")){
+      //   // refine-icon-off
+      //   cell.removeAttribute("data-refine");
+      // }
     }
 
   };
+
+  // // refine実行処理
+  // MAIN.prototype.refine_clickButton = function(cell){
+  //   if(!cell){return;}
+  //   var refine_base = document.querySelector(".refine-base");
+  //   if(!refine_base){return;}
+  //   var refine_text = refine_base.querySelector("input[type='text']");
+  //   if(!refine_text){return;}
+  //   var txt = refine_text.value;
+
+  //   // テキスト指定がある場合（絞り込み）
+  //   if(txt){
+  //     var cells = this.get_cell_rows(cell);
+  //     if(!cells || !cells.length){return}
+  //     // check match
+  //     for(var i=0; i<cells.length; i++){
+  //       var tr = new LIB().upperSelector(cells[i],"tr");
+  //       if(cells[i].textContent.match(txt)){
+  //         if(tr.getAttribute("data-hidden")){
+  //           tr.removeAttribute("data-hidden");
+  //         }
+  //       }
+  //       else{
+  //         tr.setAttribute("data-hidden","1");
+  //       }
+  //     }
+  //     // txt-cache
+  //     cell.setAttribute("data-refine-txt" , txt);
+
+  //     // close-window
+  //     this.refile_close();
+
+  //     // refine-icon-on
+  //     cell.setAttribute("data-refine" , "1");
+  //   }
+  //   // テキスト指定がない場合（絞り込みクリア）
+  //   else{
+  //     this.refine_clear();
+
+  //     // close-window
+  //     this.refile_close();
+
+  //     // refine-icon-off
+  //     cell.setAttribute("data-refine" , "0");
+
+  //     // txt-cache-remove
+  //     if(cell.getAttribute("data-refine-txt")){
+  //       cell.removeAttribute("data-refine-txt");
+  //     }
+  //   }
+  // };
 
   // refine実行処理
   MAIN.prototype.refine_clickButton = function(cell){
@@ -654,46 +683,89 @@ var $$table_sort = (function(){
     if(!refine_text){return;}
     var txt = refine_text.value;
 
-    if(txt){
-      var cells = this.get_cell_rows(cell);
-      if(!cells || !cells.length){return}
-      // check match
-      for(var i=0; i<cells.length; i++){
-        var tr = new LIB().upperSelector(cells[i],"tr");
-        if(cells[i].textContent.match(txt)){
-          if(tr.getAttribute("data-hidden")){
-            tr.removeAttribute("data-hidden");
-          }
-        }
-        else{
-          tr.setAttribute("data-hidden","1");
-        }
-      }
-      // txt-cache
+    // 1. 絞り込み文字をheaderにセット
+    if(txt !== ""){
       cell.setAttribute("data-refine-txt" , txt);
+    }
+    else if(cell.getAttribute("data-refine-txt")){
+      cell.removeAttribute("data-refine-txt");
+    }
 
-      // close-window
-      this.refile_close();
+    // 2. 現在絞り込まれている状態をクリアする
+    this.refine_clear();
 
-      // refine-icon-on
+    // 3. 対象tableを取得
+    var table = new LIB().upperSelector(cell , "table");
+    if(!table){return;}
+
+    // 3. header-cellの全てにマッチするcell-headを取得
+    var header_datas = this.refine_getPosted_HeaderCells(table);
+    if(!header_datas || !header_datas.length){return;}
+
+    // 4. 全てにマッチするtrに非表示フラグをセット
+    this.refine_getTr(header_datas);
+
+    // 5. dialogを閉じる
+    this.refile_close();
+
+    // 6. 絞り込み文字列がある場合はマークする
+    // refine-icon-on
+    if(txt !== ""){
       cell.setAttribute("data-refine" , "1");
     }
-    else{
-      // console.log("clear");
-      this.refine_clear();
-
-      // close-window
-      this.refile_close();
-
-      // refine-icon-off
-      cell.setAttribute("data-refine" , "0");
-
-      // txt-cache-remove
-      if(cell.getAttribute("data-refine-txt")){
-        cell.removeAttribute("data-refine-txt");
-      }
+    // refine-icon-off
+    else if(cell.getAttribute("data-refine")){
+      cell.removeAttribute("data-refine");
     }
   };
+
+  // header-cellの全てにマッチするcell-headを取得
+  MAIN.prototype.refine_getPosted_HeaderCells = function(table){
+    if(!table){return}
+    var header_cells = table.querySelectorAll("tr[data-tablesort='header'] > *");
+    var arr = [];
+    for(var i=0; i<header_cells.length; i++){
+      var txt = header_cells[i].getAttribute("data-refine-txt");
+      if(txt){
+        arr.push({
+          num : i,
+          txt : txt,
+          elm : header_cells[i]
+        });
+      }
+    }
+    return arr;
+  };
+
+  // 絞り込み文字列にマッチするtrを取得する。
+  MAIN.prototype.refine_getTr = function(header_datas){
+    if(!header_datas || !header_datas.length){return;}
+    var table = new LIB().upperSelector(header_datas[0].elm , "table");
+    if(!table){return}
+    var arr = [];
+    var trs = table.getElementsByTagName("tr");
+    for(var i=0; i<trs.length; i++){
+      if(trs[i].getAttribute("data-tableSort") === "header"){continue;}
+
+      var cells = trs[i].querySelectorAll(":scope > *");
+      var flg = 0;
+      for(var j=0; j<header_datas.length; j++){
+        if(typeof cells[header_datas[j].num] === "undefined"){continue;}
+        if(cells[header_datas[j].num].textContent.match(header_datas[j].txt)){
+          flg++;
+        }
+      }
+      if(flg !== header_datas.length){
+        trs[i].setAttribute("data-hidden" , "1");
+      }
+    }
+    return arr;
+  };
+
+  // // 現在セットされている値を取得する。
+  // MAIN.prototype.refine_getValue = function(){
+
+  // };
 
   MAIN.prototype.refine_clear = function(){
     var cells = document.querySelectorAll("tr[data-hidden='1']");
@@ -704,16 +776,11 @@ var $$table_sort = (function(){
 
   // 縦一列のセルを選択
   MAIN.prototype.get_cell_rows = function(cell_head){
-// console.log(cell_head);
     if(!cell_head){return}
     var pos = new LIB().getTablePosition(cell_head);
-// console.log(pos);
-    // var start_row = (pos.body === "table") ? pos.row+1 : 0;
     var table = new LIB().upperSelector(cell_head,"table");
     var cells = [];
     if(pos.body === "table"){
-      var row_start = pos.row+1;
-      // var table = cell_head.parentNode.parentNode;
       var trs = table.querySelectorAll(":scope > tr");
       for(var i=0; i<trs.length; i++){
         var tds = trs.querySelectorAll(":scope > *");
@@ -782,12 +849,6 @@ var $$table_sort = (function(){
   // return @ [true:削除 , false:何もしない]
   MAIN.prototype.refile_close = function(){
     var target = document.querySelector(".refine-base");
-
-    // // refineダイアログが表示されている同じセルをクリックした時
-    // if(target && target.targetCell === cell){console.log("+");
-    //   target.parentNode.removeChild(target);
-    //   return false;
-    // }
 
     if(target){
       target.parentNode.removeChild(target);
