@@ -8,14 +8,14 @@ tr > *[data-tableSort="header"] .tableRefine-button:hover svg{
 }
 
 
-.refine-area{
+/* .refine-area{
   position:absolute;
   top:0;
   left:0;
   width:100%;
   height:100%;
   background-color:rgba(0,0,0,0.1);
-}
+} */
 
 .refine-base{
   position:absolute;
@@ -49,6 +49,7 @@ tr > *[data-tableSort="header"] .tableSort-button,
 tr > *[data-tableSort="header"] .tableRefine-button{
   display:inline-block;
   margin-left:4px;
+  white-space:normal;
 }
 tr > *[data-tableSort="header"] .tableSort-button svg,
 tr > *[data-tableSort="header"] .tableRefine-button svg{
